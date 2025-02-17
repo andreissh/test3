@@ -1,13 +1,18 @@
 <div class="convert">
   <input class="convertInput" />
   <div class="currencyDropdown">
-    <button class="currencyDropdownBtn">
-      <span>{{ currency }}</span>
+    <button class="currencyDropdownBtn" (click)="toggleDropdown.emit()">
+      <span>{{ selectedCurrency }}</span>
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
+    @if(isOpen) {
     <ul class="currencyDropdownList">
-      <li class="currencyDropdownItem"></li>
-      <li class="currencyDropdownItem"></li>
+      @for(currency of currencies; track currency) {
+      <li class="currencyDropdownItem" (click)="selectCurrency.emit(currency)">
+        {{ currency }}
+      </li>
+      }
     </ul>
+    }
   </div>
 </div>

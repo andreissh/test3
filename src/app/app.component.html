@@ -2,11 +2,23 @@
   <div class="converterWrapper">
     <div class="converterInnerWrapper">
       <h1>Currency converter</h1>
-      <app-currency-input [currency]="'USD'"></app-currency-input>
-      <button class="changeConvertFieldsBtn">
+      <app-currency-input
+        [currencies]="currencies"
+        [selectedCurrency]="selectedCurrencyFrom"
+        [isOpen]="openDropdown === 'from'"
+        (toggleDropdown)="onToggleDropdown('from')"
+        (selectCurrency)="selectCurrency('from', $event)"
+      ></app-currency-input>
+      <button class="changeConvertFieldsBtn" (click)="swapCurrencies()">
         <img src="assets/icons/changeCurrency.svg" alt="changeCurrencyIcon" />
       </button>
-      <app-currency-input [currency]="'RUB'"></app-currency-input>
+      <app-currency-input
+        [currencies]="currencies"
+        [selectedCurrency]="selectedCurrencyTo"
+        [isOpen]="openDropdown === 'to'"
+        (toggleDropdown)="onToggleDropdown('to')"
+        (selectCurrency)="selectCurrency('to', $event)"
+      ></app-currency-input>
     </div>
   </div>
 </main>

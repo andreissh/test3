@@ -1,5 +1,5 @@
 import { MatIconModule } from '@angular/material/icon';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-currency-input',
@@ -8,5 +8,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './currency-input.component.scss',
 })
 export class CurrencyInputComponent {
-  @Input() currency: string = 'USD';
+  @Input() currencies: string[] = [];
+  @Input() selectedCurrency!: string;
+  @Input() isOpen!: boolean;
+
+  @Output() toggleDropdown = new EventEmitter<'from' | 'to'>();
+  @Output() selectCurrency = new EventEmitter<string>();
 }

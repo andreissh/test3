@@ -1,5 +1,6 @@
 .convert {
   display: flex;
+  position: relative;
 }
 
 .convertInput {
@@ -25,6 +26,27 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+}
+
+.currencyDropdownList {
+  position: absolute;
+  right: 0;
+  top: 2.6rem;
+  width: 60%;
+  max-height: 120px;
+  overflow-y: auto;
+  background-color: #efefef;
+  border: 1px solid #d1d5db;
+  z-index: 2;
+}
+
+.currencyDropdownItem {
+  padding: 0.25rem;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.currencyDropdownItem:last-child {
+  border-bottom: 0;
 }
 
 @media (max-width: 768px) {
