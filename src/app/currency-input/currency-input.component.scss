@@ -1,0 +1,48 @@
+.convert {
+  display: flex;
+}
+
+.convertInput {
+  width: 80%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem 0 0 0.5rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.currencyDropdown {
+  width: 20%;
+  background-color: #efefef;
+  border: 1px solid #d1d5db;
+  border-left: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+  cursor: pointer;
+  display: flex;
+  padding: 0.5rem;
+}
+
+.currencyDropdownBtn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .currencyDropdown {
+    width: 30%;
+  }
+
+  .convertInput {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1366px) {
+  .currencyDropdown {
+    width: 15%;
+  }
+
+  .convertInput {
+    width: 85%;
+  }
+}
