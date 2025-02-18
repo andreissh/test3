@@ -4,7 +4,7 @@
       <h1>Currency Converter</h1>
       <app-currency-input
         [currencies]="currencies"
-        [selectedCurrency]="selectedCurrencyFrom"
+        [selectedCurrency]="(selectedCurrencyFrom$ | async)!"
         [isOpen]="openDropdown === 'from'"
         (toggleDropdown)="onToggleDropdown('from')"
         (selectCurrency)="selectCurrency('from', $event)"
