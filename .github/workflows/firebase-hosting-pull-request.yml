@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Run set-env script and build the project
-      - run: npm run set-env && npx ng build --configuration=production
+        run: npm run set-env && npx ng build --configuration=production
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
