@@ -3,7 +3,7 @@
   position: relative;
 }
 
-.convertInput {
+.convert-input {
   width: 80%;
   padding: 0.5rem;
   border: 1px solid #d1d5db;
@@ -11,7 +11,11 @@
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
-.currencyDropdown {
+.readonly {
+  cursor: auto;
+}
+
+.currency-dropdown {
   width: 20%;
   background-color: #efefef;
   border: 1px solid #d1d5db;
@@ -22,13 +26,13 @@
   padding: 0.5rem;
 }
 
-.currencyDropdownBtn {
+.currency-dropdown-btn {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.currencyDropdownList {
+.currency-dropdown-list {
   position: absolute;
   right: 0;
   top: 2.6rem;
@@ -40,31 +44,31 @@
   z-index: 2;
 }
 
-.currencyDropdownItem {
+.currency-dropdown-item {
   padding: 0.25rem;
   border-bottom: 1px solid #d1d5db;
 }
 
-.currencyDropdownItem:last-child {
+.currency-dropdown-item:last-child {
   border-bottom: 0;
 }
 
 @media (max-width: 768px) {
-  .currencyDropdown {
+  .currency-dropdown {
     width: 30%;
   }
 
-  .convertInput {
+  .convert-input {
     width: 70%;
   }
 }
 
 @media (min-width: 1366px) {
-  .currencyDropdown {
+  .currency-dropdown {
     width: 15%;
   }
 
-  .convertInput {
+  .convert-input {
     width: 85%;
   }
 }

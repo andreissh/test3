@@ -6,7 +6,7 @@ main {
   background-color: #f3f4f6;
 }
 
-.converterWrapper {
+.converter-wrapper {
   width: 50vw;
   max-width: 960px;
   max-height: 360px;
@@ -17,7 +17,7 @@ main {
     0 4px 6px -4px rgb(0, 0, 0, 0.1);
 }
 
-.converterInnerWrapper {
+.converter-inner-wrapper {
   padding: 1.25rem;
   height: 100%;
   display: flex;
@@ -25,7 +25,7 @@ main {
   gap: 2rem;
 }
 
-.changeConvertFieldsBtn {
+.change-convert-fields-btn {
   width: 32px;
   height: 32px;
   border-radius: 50%;

@@ -1,6 +1,6 @@
 <main>
-  <div class="converterWrapper">
-    <div class="converterInnerWrapper">
+  <div class="converter-wrapper">
+    <div class="converter-inner-wrapper">
       <h1>Currency Converter</h1>
       <app-currency-input
         [currencies]="currencies"
@@ -11,7 +11,7 @@
         (selectCurrency)="selectCurrency('from', $event)"
         (amountChange)="updateAmountFrom($event)"
       ></app-currency-input>
-      <button class="changeConvertFieldsBtn" (click)="swapCurrencies()">
+      <button class="change-convert-fields-btn" (click)="swapCurrencies()">
         <img src="assets/icons/changeCurrency.svg" alt="changeCurrencyIcon" />
       </button>
       <app-currency-input

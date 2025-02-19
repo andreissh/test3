@@ -1,20 +1,24 @@
 <div class="convert">
   <input
-    class="convertInput"
+    class="convert-input"
+    [class.readonly]="readonly"
     type="number"
     [value]="amount"
     [readonly]="readonly"
     (input)="onInput($event)"
   />
-  <div class="currencyDropdown">
-    <button class="currencyDropdownBtn" (click)="toggleDropdown.emit()">
+  <div class="currency-dropdown" (click)="toggleDropdown.emit()">
+    <button class="currency-dropdown-btn">
       <span>{{ selectedCurrency }}</span>
       <mat-icon>keyboard_arrow_down</mat-icon>
     </button>
     @if(isOpen) {
-    <ul class="currencyDropdownList">
+    <ul class="currency-dropdown-list">
       @for(currency of currencies; track currency) {
-      <li class="currencyDropdownItem" (click)="selectCurrency.emit(currency)">
+      <li
+        class="currency-dropdown-item"
+        (click)="selectCurrency.emit(currency)"
+      >
         {{ currency }}
       </li>
       }

@@ -1,13 +1,13 @@
-import { Component, inject } from '@angular/core';
-import { CurrencyInputComponent } from './currency-input/currency-input.component';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { BehaviorSubject, switchMap } from 'rxjs';
+import { Component, HostListener } from '@angular/core';
+import { CurrencyInputComponent } from './components/currency-input/currency-input.component';
+import { BehaviorSubject, switchMap, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { CurrencyService } from './services/currency.service';
 
 @Component({
   selector: 'app-root',
   imports: [CommonModule, CurrencyInputComponent],
+  providers: [CurrencyService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -17,22 +17,20 @@ export class AppComponent {
   selectedCurrencyTo = 'RUB';
   conversionRates: Record<string, number> = {};
   openDropdown: 'from' | 'to' | null = null;
+  isLoading: boolean = false;
   amountFrom = 0;
+  currentAmountTo: number = 1;
 
-  private http = inject(HttpClient);
-
-  constructor() {
+  constructor(currencyService: CurrencyService) {
     this.selectedCurrencyFrom$
       .pipe(
-        switchMap((currency) =>
-          this.http.get(
-            `https://v6.exchangerate-api.com/v6/${environment.apiKey}/latest/${currency}`
-          )
-        )
+        tap(() => (this.isLoading = true)),
+        switchMap((currency) => currencyService.getExchangeRates(currency))
       )
       .subscribe((data: any) => {
         this.currencies = Object.keys(data.conversion_rates);
         this.conversionRates = data.conversion_rates;
+        this.isLoading = false;
       });
   }
 
@@ -46,7 +44,7 @@ export class AppComponent {
     } else {
       this.selectedCurrencyTo = currency;
     }
-    this.openDropdown = null;
+    this.openDropdown = type;
   }
 
   swapCurrencies() {
@@ -57,10 +55,28 @@ export class AppComponent {
 
   get amountTo(): number {
     const rate = this.conversionRates[this.selectedCurrencyTo] || 1;
-    return this.amountFrom * rate;
+    if (!this.isLoading) {
+      this.currentAmountTo = this.amountFrom * rate;
+      return this.amountFrom * rate;
+    }
+
+    return this.currentAmountTo;
   }
 
   updateAmountFrom(value: number) {
     this.amountFrom = value;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.currency-dropdown')) {
+      this.openDropdown = null;
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.openDropdown = null;
   }
 }
