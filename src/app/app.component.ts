@@ -15,7 +15,9 @@ export class AppComponent {
   currencies: string[] = [];
   selectedCurrencyFrom$ = new BehaviorSubject<string>('USD');
   selectedCurrencyTo = 'RUB';
+  conversionRates: Record<string, number> = {};
   openDropdown: 'from' | 'to' | null = null;
+  amountFrom = 0;
 
   private http = inject(HttpClient);
 
@@ -29,8 +31,8 @@ export class AppComponent {
         )
       )
       .subscribe((data: any) => {
-        console.log(data);
         this.currencies = Object.keys(data.conversion_rates);
+        this.conversionRates = data.conversion_rates;
       });
   }
 
@@ -51,5 +53,14 @@ export class AppComponent {
     const currentFrom = this.selectedCurrencyFrom$.getValue();
     this.selectedCurrencyFrom$.next(this.selectedCurrencyTo);
     this.selectedCurrencyTo = currentFrom;
+  }
+
+  get amountTo(): number {
+    const rate = this.conversionRates[this.selectedCurrencyTo] || 1;
+    return this.amountFrom * rate;
+  }
+
+  updateAmountFrom(value: number) {
+    this.amountFrom = value;
   }
 }

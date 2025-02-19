@@ -1,5 +1,11 @@
 <div class="convert">
-  <input class="convertInput" />
+  <input
+    class="convertInput"
+    type="number"
+    [value]="amount"
+    [readonly]="readonly"
+    (input)="onInput($event)"
+  />
   <div class="currencyDropdown">
     <button class="currencyDropdownBtn" (click)="toggleDropdown.emit()">
       <span>{{ selectedCurrency }}</span>

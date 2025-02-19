@@ -6,8 +6,10 @@
         [currencies]="currencies"
         [selectedCurrency]="(selectedCurrencyFrom$ | async)!"
         [isOpen]="openDropdown === 'from'"
+        [amount]="amountFrom"
         (toggleDropdown)="onToggleDropdown('from')"
         (selectCurrency)="selectCurrency('from', $event)"
+        (amountChange)="updateAmountFrom($event)"
       ></app-currency-input>
       <button class="changeConvertFieldsBtn" (click)="swapCurrencies()">
         <img src="assets/icons/changeCurrency.svg" alt="changeCurrencyIcon" />
@@ -16,6 +18,8 @@
         [currencies]="currencies"
         [selectedCurrency]="selectedCurrencyTo"
         [isOpen]="openDropdown === 'to'"
+        [amount]="amountTo"
+        [readonly]="true"
         (toggleDropdown)="onToggleDropdown('to')"
         (selectCurrency)="selectCurrency('to', $event)"
       ></app-currency-input>
