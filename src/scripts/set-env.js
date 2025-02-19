@@ -10,11 +10,16 @@ if (!fs.existsSync(envDir)) {
   fs.mkdirSync(envDir, { recursive: true });
 }
 
-const envFilePath = path.join(envDir, "environment.ts");
-
-const envConfig = `export const environment = {
+const devEnvFilePath = path.join(envDir, "environment.ts");
+const devEnvConfig = `export const environment = {
   production: false,
   apiKey: '${process.env.API_KEY}'
 };`;
+fs.writeFileSync(devEnvFilePath, devEnvConfig);
 
-fs.writeFileSync(envFilePath, envConfig);
+const prodEnvFilePath = path.join(envDir, "environment.prod.ts");
+const prodEnvConfig = `export const environment = {
+  production: true,
+  apiKey: '${process.env.API_KEY}'
+};`;
+fs.writeFileSync(prodEnvFilePath, prodEnvConfig);
